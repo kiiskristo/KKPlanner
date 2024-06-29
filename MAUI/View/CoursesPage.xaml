@@ -2,36 +2,56 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
-             xmlns:model="clr-namespace:MAUI.Model"
              xmlns:maui="clr-namespace:MAUI"
-             x:DataType ="viewModel:CoursesViewModel"
-             x:Class="MAUI.View.CoursesPage">
+             xmlns:viewModel1="clr-namespace:AMMA.Data.ViewModel;assembly=AMMA.Data"
+             xmlns:model="clr-namespace:AMMA.Data.Model;assembly=AMMA.Data"
+             xmlns:data="clr-namespace:AMMA.Data;assembly=AMMA.Data"
+             x:DataType ="viewModel1:CoursesViewModel"
+             x:Class="MAUI.View.CoursesPage"
+             x:Name="ThisPage">
     <ContentPage.Content>
+           
         <Grid Margin="10,0" RowDefinitions="Auto,*">
-        <StackLayout>
-            <ListView x:Name="TermsListView" 
-                      ItemsSource="{Binding Courses}" 
-                      ItemSelected="OnItemSelected"
-                      SeparatorVisibility="None">
+            <StackLayout>
+                <SearchBar 
+                    Placeholder="Search courses..."
+                    Text="{Binding SearchQuery}"
+                />
+                <ListView x:Name="TermsListView" 
+                          ItemsSource="{Binding Courses}" 
+                          ItemSelected="OnItemSelected"
+                          SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:Course">
                         <ViewCell>
                             <StackLayout Orientation="Vertical" HeightRequest="70">
                                 <Grid Padding="10,30" ColumnSpacing="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0"
-                                           Text="{Binding Title}"
-                                           FontSize="Small"
-                                           FontAttributes="Bold"/>
-                                    <Label Grid.Column="1"
-                                           Text="{Binding Status}"
-                                           FontSize="Small"
-                                           HorizontalOptions="EndAndExpand"/>
-                                </Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0"
+                                               Text="{Binding Title}"
+                                               FontSize="Small"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"/>
+                                        <Button Grid.Column="1" 
+                                                Command="{Binding Path=BindingContext.EditCourseCommand, Source={x:Reference ThisPage}}" 
+                                                CommandParameter="{Binding Id}"
+                                                Margin="10,0,0,0"
+                                                CornerRadius="20"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                BackgroundColor="white"
+                                                VerticalOptions="Center">
+                                            <Button.ImageSource>
+                                                <FontImageSource FontFamily="FASolid"
+                                                                 Glyph="{x:Static data:FaSolid.Edit}"
+                                                                 Size="20"
+                                                                 Color="#512BD4" />
+                                            </Button.ImageSource>
+                                        </Button>
+                                    </Grid>
                                 <BoxView 
                                     HeightRequest="0.5" 
                                     BackgroundColor="Gray" 
@@ -58,7 +78,7 @@
                 <Button.ImageSource>
                     <FontImageSource
                         FontFamily="FASolid"
-                        Glyph="{x:Static maui:FaSolid.Plus}"
+                        Glyph="{x:Static data:FaSolid.Plus}"
                         Size="20"
                         Color="{StaticResource White}" />
                 </Button.ImageSource>

@@ -1,0 +1,242 @@
+{
+  "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/Microsoft.Web-WebAppDatabase-Portal-f2bc4b86-bb00",
+  "name": "Microsoft.Web-WebAppDatabase-Portal-f2bc4b86-bb00",
+  "type": "Microsoft.Resources/deployments",
+  "properties": {
+    "templateHash": "6631087292281796232",
+    "parameters": {
+      "subscriptionId": {
+        "type": "String",
+        "value": "160aefb0-0d52-40ae-b833-f3b8dd87dfa4"
+      },
+      "name": {
+        "type": "String",
+        "value": "kkplanner"
+      },
+      "location": {
+        "type": "String",
+        "value": "East US"
+      },
+      "hostingPlanName": {
+        "type": "String",
+        "value": "ASP-wguschoolwork-8723"
+      },
+      "serverFarmResourceGroup": {
+        "type": "String",
+        "value": "wgu_schoolwork"
+      },
+      "databaseName": {
+        "type": "String",
+        "value": "kkplanner"
+      },
+      "ftpsState": {
+        "type": "String",
+        "value": "FtpsOnly"
+      },
+      "sku": {
+        "type": "String",
+        "value": "Basic"
+      },
+      "skuCode": {
+        "type": "String",
+        "value": "B1"
+      },
+      "workerSize": {
+        "type": "String",
+        "value": ""
+      },
+      "workerSizeId": {
+        "type": "String",
+        "value": ""
+      },
+      "numberOfWorkers": {
+        "type": "String",
+        "value": "1"
+      },
+      "linuxFxVersion": {
+        "type": "String",
+        "value": "DOTNETCORE|8.0"
+      },
+      "storageSizeGB": {
+        "type": "Int",
+        "value": 20
+      },
+      "backupRetentionDays": {
+        "type": "Int",
+        "value": 7
+      },
+      "geoRedundantBackup": {
+        "type": "String",
+        "value": "Disabled"
+      },
+      "vmName": {
+        "type": "String",
+        "value": "Standard_B1ms"
+      },
+      "storageAutogrow": {
+        "type": "String",
+        "value": "Enabled"
+      },
+      "storageIops": {
+        "type": "Int",
+        "value": 700
+      },
+      "publicNetworkAccess": {
+        "type": "String",
+        "value": "Disabled"
+      },
+      "serverEdition": {
+        "type": "String",
+        "value": "Burstable"
+      },
+      "vCores": {
+        "type": "Int",
+        "value": 2
+      },
+      "serverName": {
+        "type": "String",
+        "value": "kkplanner"
+      },
+      "serverUsername": {
+        "type": "String",
+        "value": "fwjfptlqpj"
+      },
+      "serverPassword": {
+        "type": "SecureString"
+      },
+      "collation": {
+        "type": "String",
+        "value": "utf8_general_ci"
+      },
+      "charset": {
+        "type": "String",
+        "value": "utf8"
+      },
+      "isVnetEnabled": {
+        "type": "Bool",
+        "value": true
+      },
+      "isPrivateEndpointForAppEnabled": {
+        "type": "Bool",
+        "value": false
+      },
+      "vnetName": {
+        "type": "String",
+        "value": "kkplannerVnet"
+      },
+      "privateEndpointSubnet": {
+        "type": "String",
+        "value": "kkplannerSubnet"
+      },
+      "subnetForApp": {
+        "type": "String",
+        "value": "kkplannerAppSubnet"
+      },
+      "subnetForDb": {
+        "type": "String",
+        "value": "kkplannerDbSubnet"
+      },
+      "privateEndpointNameForApp": {
+        "type": "String",
+        "value": "kkplannerAppEndpoint"
+      },
+      "privateEndpointNameForDb": {
+        "type": "String",
+        "value": ""
+      },
+      "privateEndpointNameForCache": {
+        "type": "String",
+        "value": "undefined-cache-privateEndpoint"
+      },
+      "privateDnsZoneNameForApp": {
+        "type": "String",
+        "value": "privatelink.azurewebsites.net"
+      },
+      "privateDnsZoneNameForDb": {
+        "type": "String",
+        "value": "privatelink.mysql.database.azure.com"
+      },
+      "privateDnsZoneNameForCache": {
+        "type": "String",
+        "value": "privatelink.redis.cache.windows.net"
+      },
+      "isCacheEnabled": {
+        "type": "Bool",
+        "value": false
+      },
+      "cacheName": {
+        "type": "String",
+        "value": "undefined-cache"
+      }
+    },
+    "mode": "Incremental",
+    "debugSetting": {
+      "detailLevel": "None"
+    },
+    "provisioningState": "Running",
+    "timestamp": "2024-03-28T04:23:57.884169Z",
+    "duration": "PT1M49.4338278S",
+    "correlationId": "7ead1194-83c9-4093-b385-f2bcc63eadc5",
+    "providers": [
+      {
+        "namespace": "Microsoft.Resources",
+        "resourceTypes": [
+          {
+            "resourceType": "deployments",
+            "locations": [
+              null
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/vnetResourcesDeployment",
+            "resourceType": "Microsoft.Resources/deployments",
+            "resourceName": "vnetResourcesDeployment"
+          }
+        ],
+        "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/databaseResourcesDeployment",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "databaseResourcesDeployment"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/vnetResourcesDeployment",
+            "resourceType": "Microsoft.Resources/deployments",
+            "resourceName": "vnetResourcesDeployment"
+          }
+        ],
+        "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/appServiceResourcesDeployment",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "appServiceResourcesDeployment"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/databaseResourcesDeployment",
+            "resourceType": "Microsoft.Resources/deployments",
+            "resourceName": "databaseResourcesDeployment"
+          },
+          {
+            "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/appServiceResourcesDeployment",
+            "resourceType": "Microsoft.Resources/deployments",
+            "resourceName": "appServiceResourcesDeployment"
+          }
+        ],
+        "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/appServiceDatabaseConnectionResourcesDeployment",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "appServiceDatabaseConnectionResourcesDeployment"
+      }
+    ],
+    "validationLevel": "Template"
+  },
+  "tags": {
+    "primaryResourceId": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourcegroups/wgu_schoolwork/providers/Microsoft.Web/sites/kkplanner",
+    "marketplaceItemId": "Microsoft.AppServiceWebAppDatabaseV3"
+  }
+}

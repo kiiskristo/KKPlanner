@@ -1,5 +1,7 @@
-using MAUI.Model;
-using MAUI.ViewModel;
+using System;
+using AMMA.Data.Model;
+using AMMA.Data.ViewModel;
+using Microsoft.Maui.Controls;
 
 namespace MAUI.View;
 

@@ -10,11 +10,15 @@
        Shell.TabBarForegroundColor="White"
        Shell.TabBarTitleColor="White"
        Shell.TabBarUnselectedColor="#95A5A6">
-    
     <TabBar>
-        <ShellContent Title="Terms" Icon="icon_monkeys.png" Route="terms" ContentTemplate="{DataTemplate view:TermsPage}" />
-        <ShellContent Title="Courses" Icon="icon_elephants.png" Route="courses" ContentTemplate="{DataTemplate view:CoursesPage}" />
-        <ShellContent Title="Instructors" Icon="icon_bears.png" Route="instructors" ContentTemplate="{DataTemplate view:InstructorsPage}" />
+        <ShellContent Title="Terms" Route="terms" ContentTemplate="{DataTemplate view:TermsPage}" />
+        <ShellContent Title="Courses" Route="courses" ContentTemplate="{DataTemplate view:CoursesPage}" />
+        <ShellContent Title="Instructors" Route="instructors" ContentTemplate="{DataTemplate view:InstructorsPage}" />
+        <Tab Title="Reports" >
+            <ShellContent Title="Grades" Route="reports1" ContentTemplate="{DataTemplate view:ReportsPage}" />
+            <ShellContent Title="Courses" Route="reports2" ContentTemplate="{DataTemplate view:ReportsPage}" />
+            <ShellContent Title="Assessments" Route="reports3" ContentTemplate="{DataTemplate view:ReportsPage}" />
+        </Tab>
     </TabBar>
-    <ShellContent Title="About" Icon="icon_about.png" Route="Test" ContentTemplate="{DataTemplate view:LoaderPage}" />
+    <ShellContent Title="Login" Route="Login" ContentTemplate="{DataTemplate view:LoginPage}" />
 </Shell>

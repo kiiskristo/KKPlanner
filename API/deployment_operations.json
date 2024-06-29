@@ -1,0 +1,53 @@
+[
+  {
+    "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/Microsoft.Web-WebAppDatabase-Portal-f2bc4b86-bb00/operations/E93908FE4FD3DAD5",
+    "operationId": "E93908FE4FD3DAD5",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Running",
+      "timestamp": "2024-03-28T04:24:13.1170835Z",
+      "duration": "PT46.7940985S",
+      "trackingId": "118cab45-c526-4388-8c19-b5e63d6fbaa2",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/appServiceResourcesDeployment",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "appServiceResourcesDeployment"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/Microsoft.Web-WebAppDatabase-Portal-f2bc4b86-bb00/operations/8853973A8934E278",
+    "operationId": "8853973A8934E278",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Running",
+      "timestamp": "2024-03-28T04:24:12.8881583Z",
+      "duration": "PT2M4.2431686S",
+      "trackingId": "3f459496-aad4-4462-9d99-4a9e3df111c1",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/databaseResourcesDeployment",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "databaseResourcesDeployment"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/Microsoft.Web-WebAppDatabase-Portal-f2bc4b86-bb00/operations/85EC88970CD13AB3",
+    "operationId": "85EC88970CD13AB3",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-03-28T04:23:26.2812507Z",
+      "duration": "PT1M17.636261S",
+      "trackingId": "d213d13c-5376-4552-8947-15f1759bc922",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/160aefb0-0d52-40ae-b833-f3b8dd87dfa4/resourceGroups/wgu_schoolwork/providers/Microsoft.Resources/deployments/vnetResourcesDeployment",
+        "resourceType": "Microsoft.Resources/deployments",
+        "resourceName": "vnetResourcesDeployment"
+      }
+    }
+  }
+]

@@ -2,21 +2,23 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
-             xmlns:model="clr-namespace:MAUI.Model"
-             xmlns:maui="clr-namespace:MAUI"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:DataType ="viewModel:TermsViewModel"
+             xmlns:expander="clr-namespace:epj.Expander.Maui;assembly=epj.Expander.Maui"
+             xmlns:viewmodel="clr-namespace:AMMA.Data.ViewModel;assembly=AMMA.Data"
+             xmlns:model="clr-namespace:AMMA.Data.Model;assembly=AMMA.Data"
+             xmlns:data="clr-namespace:AMMA.Data;assembly=AMMA.Data"
+             x:DataType ="viewmodel:TermsViewModel"
              x:Class="MAUI.View.TermsPage"
              x:Name="ThisPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Log out" Clicked="OnLogoutClicked" Priority="0" Order="Primary" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid Margin="10,0" RowDefinitions="Auto,*">
-            
-            <CollectionView ItemsSource="{Binding Terms}">
-                <CollectionView.ItemTemplate>
+            <VerticalStackLayout Spacing="6" BindableLayout.ItemsSource="{Binding Terms}">
+                <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="model:Term">
-                        <toolkit:Expander x:Name="MyExpander">
-                            <toolkit:Expander.Header>
+                        <expander:Expander Animated="True" IsExpanded="{Binding IsSelected}">
+                            <expander:Expander.HeaderContent>
                                 <StackLayout Orientation="Vertical" HeightRequest="70">
                                     <Grid Padding="10,30" ColumnSpacing="0">
                                         <Grid.ColumnDefinitions>
@@ -35,7 +37,7 @@
                                                HorizontalOptions="EndAndExpand"
                                                VerticalOptions="Center"/>
                                         <Button Grid.Column="2" 
-                                                Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference ThisPage}}"
+                                                Command="{Binding Path=BindingContext.EditTermCommand, Source={x:Reference ThisPage}}"
                                                 CommandParameter="{Binding Id}"
                                                 Margin="10,0,0,0"
                                                 CornerRadius="20"
@@ -45,7 +47,7 @@
                                                 VerticalOptions="Center">
                                             <Button.ImageSource>
                                                 <FontImageSource FontFamily="FASolid"
-                                                                 Glyph="{x:Static maui:FaSolid.Edit}"
+                                                                 Glyph="{x:Static data:FaSolid.Edit}"
                                                                  Size="20"
                                                                  Color="#512BD4" />
                                             </Button.ImageSource>
@@ -56,8 +58,8 @@
                                         BackgroundColor="Gray" 
                                         Margin="6,-28"/>
                                 </StackLayout>
-                            </toolkit:Expander.Header>
-                            <toolkit:Expander.Content>
+                            </expander:Expander.HeaderContent>
+                            <Grid>
                                 <CollectionView ItemsSource="{Binding Courses}" x:Name="ExpanderContent">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="model:Course">
@@ -83,7 +85,7 @@
                                                             VerticalOptions="Center">
                                                         <Button.ImageSource>
                                                             <FontImageSource FontFamily="FASolid"
-                                                                             Glyph="{x:Static maui:FaSolid.Edit}"
+                                                                             Glyph="{x:Static data:FaSolid.Edit}"
                                                                              Size="20"
                                                                              Color="#512BD4" />
                                                         </Button.ImageSource>
@@ -93,33 +95,28 @@
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
-                            </toolkit:Expander.Content>
-                        </toolkit:Expander>
+                            </Grid>
+                        </expander:Expander>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        <FlexLayout
-            Grid.Row="1"
-            AlignItems="End"
-            JustifyContent="End"
-            Wrap="NoWrap">
-            <Button
-                Command="{Binding AddCommand}"
-                AbsoluteLayout.LayoutBounds="1,1,60,60"
-                AbsoluteLayout.LayoutFlags="PositionProportional"
-                CornerRadius="35"
-                HeightRequest="70"
-                WidthRequest="70"
-                Margin="0,0,10,20">
-                <Button.ImageSource>
-                    <FontImageSource
-                        FontFamily="FASolid"
-                        Glyph="{x:Static maui:FaSolid.Plus}"
-                        Size="20"
-                        Color="{StaticResource White}" />
-                </Button.ImageSource>
-            </Button>
-        </FlexLayout>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+            <FlexLayout Grid.Row="1"
+                        AlignItems="End"
+                        JustifyContent="End"
+                        Wrap="NoWrap">
+                <Button Command="{Binding AddCommand}"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    CornerRadius="35"
+                    HeightRequest="70"
+                    WidthRequest="70"
+                    Margin="0,0,10,20">
+                    <Button.ImageSource>
+                        <FontImageSource FontFamily="FASolid"
+                                        Glyph="{x:Static data:FaSolid.Plus}"
+                                        Color="{StaticResource White}" />
+                    </Button.ImageSource>
+                </Button>
+            </FlexLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

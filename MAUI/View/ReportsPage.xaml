@@ -1,0 +1,23 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             x:Class="MAUI.View.ReportsPage"
+             x:DataType ="viewModel:ReportsViewModel"
+             xmlns:viewModel="clr-namespace:AMMA.Data.ViewModel;assembly=AMMA.Data">
+    <ContentPage.Content>
+        <charts:SfCartesianChart>
+            <charts:SfCartesianChart.XAxes>
+                <charts:CategoryAxis />
+            </charts:SfCartesianChart.XAxes>
+
+            <charts:SfCartesianChart.YAxes>
+                <charts:NumericalAxis />
+            </charts:SfCartesianChart.YAxes>  
+
+            <charts:LineSeries 
+                XBindingPath="Date"
+                              ItemsSource="{Binding AverageGradeOverTime}"
+                              YBindingPath="AverageGrade"/>
+        </charts:SfCartesianChart>
+    </ContentPage.Content>
+</ContentPage>

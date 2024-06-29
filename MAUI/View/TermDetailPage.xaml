@@ -3,12 +3,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
-             xmlns:model="clr-namespace:MAUI.Model"
-             x:DataType ="viewModel:TermDetailViewModel"
+             x:DataType ="viewmodel:TermDetailViewModel"
              x:Class="MAUI.View.TermDetailPage"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:maui="clr-namespace:MAUI"
+             xmlns:viewmodel="clr-namespace:AMMA.Data.ViewModel;assembly=AMMA.Data"
+             xmlns:data="clr-namespace:AMMA.Data;assembly=AMMA.Data"
+             xmlns:model="clr-namespace:AMMA.Data.Model;assembly=AMMA.Data"
              x:Name="ThisPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -16,17 +16,19 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" x:DataType="viewModel:TermDetailViewModel" Command="{Binding SaveCommand}"/>
-        <ToolbarItem Text="Delete" IsDestructive="True" IsEnabled="{Binding IsEditMode}" x:DataType="viewModel:TermDetailViewModel" Command="{Binding DeleteCommand}"/>
+        <ToolbarItem Text="Save" x:DataType="viewmodel:TermDetailViewModel" Command="{Binding SaveCommand}"/>
+        <ToolbarItem Text="Delete" IsDestructive="True" IsEnabled="{Binding IsEditMode}" x:DataType="viewmodel:TermDetailViewModel" Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <VerticalStackLayout Spacing="25" Padding="30">
                 <Entry x:Name="TitleEntry"
-                       Text="{Binding Title.Value}"
+                       Text="{Binding Title}"
                        Placeholder="Title"
                        FontSize="Medium"/>
-                <Label Text="{Binding Title.ErrorString}" IsVisible="{Binding Title.HasErrors}" TextColor="Red"/>
+                <Label IsVisible="{Binding HasErrors}"
+                       Text="Title is mandatory"
+                       TextColor="Red"/>
                 <VerticalStackLayout Spacing="0">
                 <Label Text="Start Date" FontAttributes="Bold"/>
                 <DatePicker x:Name="StartDatePicker"
@@ -64,7 +66,7 @@
                                             VerticalOptions="Center">
                                         <Button.ImageSource>
                                             <FontImageSource FontFamily="FASolid"
-                                                             Glyph="{x:Static maui:FaSolid.Edit}"
+                                                             Glyph="{x:Static data:FaSolid.Edit}"
                                                              Size="20"
                                                              Color="#512BD4" />
                                         </Button.ImageSource>

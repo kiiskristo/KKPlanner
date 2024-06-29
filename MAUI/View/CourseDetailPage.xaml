@@ -3,12 +3,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
-             x:DataType ="viewModel:CourseDetailViewModel"
+             xmlns:viewModel="clr-namespace:AMMA.Data.ViewModel"
+             x:DataType ="viewModel1:CourseDetailViewModel"
              x:Class="MAUI.View.CourseDetailPage"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:model="clr-namespace:MAUI.Model"
-             xmlns:maui="clr-namespace:MAUI"
+             xmlns:model="clr-namespace:AMMA.Data.Model"
+             xmlns:maui="clr-namespace:AMMA.Data"
+             xmlns:viewModel1="clr-namespace:AMMA.Data.ViewModel;assembly=AMMA.Data"
+             xmlns:model1="clr-namespace:AMMA.Data.Model;assembly=AMMA.Data"
+             xmlns:data="clr-namespace:AMMA.Data;assembly=AMMA.Data"
              x:Name="ThisPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -16,8 +19,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" x:DataType="viewModel:CourseDetailViewModel" Command="{Binding SaveCommand}"/>
-        <ToolbarItem Text="Delete" IsDestructive="True" IsEnabled="{Binding IsEditMode}" x:DataType="viewModel:CourseDetailViewModel" Command="{Binding DeleteCommand}"/>
+        <ToolbarItem Text="Save" x:DataType="viewModel1:CourseDetailViewModel" Command="{Binding SaveCommand}"/>
+        <ToolbarItem Text="Delete" IsDestructive="True" IsEnabled="{Binding IsEditMode}" x:DataType="viewModel1:CourseDetailViewModel" Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
@@ -101,7 +104,7 @@
                                 VerticalOptions="Start">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FASolid"
-                                                Glyph="{x:Static maui:FaSolid.Share}"
+                                                Glyph="{x:Static data:FaSolid.Share}"
                                                 Size="20"
                                                 Color="White" />
                             </Button.ImageSource>
@@ -111,7 +114,7 @@
                         <Label Text="Assessments" FontAttributes="Bold"/>
                         <VerticalStackLayout BindableLayout.ItemsSource="{Binding CurrentCourse.Assessments}">
                             <BindableLayout.ItemTemplate>
-                                <DataTemplate x:DataType="model:Assessment">
+                                <DataTemplate x:DataType="model1:Assessment">
                                     <Grid HorizontalOptions="FillAndExpand" HeightRequest="40" RowDefinitions="Auto" ColumnDefinitions="*, Auto">
                                         <Label Text="{Binding AssessmentName}" 
                                                HorizontalOptions="StartAndExpand" 
@@ -129,7 +132,7 @@
                                                 VerticalOptions="Center">
                                             <Button.ImageSource>
                                                 <FontImageSource FontFamily="FASolid"
-                                                                 Glyph="{x:Static maui:FaSolid.Edit}"
+                                                                 Glyph="{x:Static data:FaSolid.Edit}"
                                                                  Size="20"
                                                                  Color="#512BD4" />
                                             </Button.ImageSource>

@@ -1,5 +1,5 @@
-using MAUI.Model;
-using MAUI.ViewModel;
+using AMMA.Data.ViewModel;
+using Microsoft.Maui.Controls;
 
 namespace MAUI.View;
 
@@ -17,11 +17,6 @@ public partial class CoursesPage : ContentPage
     }
     private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        if (e.SelectedItem is Course selectedCourse)
-        {
-            var viewModel = BindingContext as CoursesViewModel;
-            viewModel?.EditCommand.Execute(selectedCourse);
-        }
         if (sender is ListView listView)
         {
             listView.SelectedItem = null;

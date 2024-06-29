@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.View.LoginPage">
+             
+    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <VerticalStackLayout>
+            <Image
+                Source="logo.png"
+                HeightRequest="300"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a race car number eight" />
+            <!-- Login Button -->
+            <Button x:Name="LoginBtn"
+                Text="Log In"
+                SemanticProperties.Hint="Click to log in"
+                Clicked="OnLoginClicked"
+                WidthRequest="200"
+                HeightRequest="50"
+                FontSize="Medium"
+                CornerRadius="25"/>
+
+        <!-- Loader View -->
+        <StackLayout x:Name="LoaderView"
+                     IsVisible="false"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center">
+            <ActivityIndicator IsRunning="True"
+                               WidthRequest="100"
+                               HeightRequest="100"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+        </StackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

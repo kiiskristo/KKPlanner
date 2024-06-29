@@ -1,35 +1,29 @@
-using System.ComponentModel;
-using CommunityToolkit.Maui.Views;
-using MAUI.Model;
 using MAUI.Utils;
-using MAUI.ViewModel;
-using Plugin.LocalNotification;
+using AMMA.Data.ViewModel;
 
 namespace MAUI.View;
 
 public partial class TermsPage : ContentPage
 {
-    private readonly INotificationUtility _notificationUtility;
-    public TermsPage(INotificationUtility notificationUtility, TermsViewModel viewModel)
+    public TermsPage(TermsViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
-        _notificationUtility = notificationUtility;
     }
-
+    
+    private async void OnLogoutClicked(object sender, EventArgs e)
+    {
+        var success = await AuthUtility.Instance.LogoutAsync();
+        if (!success) { return; }
+        var current = Application.Current;
+        if (current is not null) {
+            current.MainPage = new LoginPage();
+        }
+    }
+    
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ((TermsViewModel)BindingContext).LoadTerms();
-        InitializeNotifications();
-    }
-    
-    private async void InitializeNotifications()
-    {
-        if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
-        {
-            await LocalNotificationCenter.Current.RequestNotificationPermission();
-        }
-        await _notificationUtility.CheckAndNotifyAsync();
+        ((TermsViewModel)BindingContext).LoadTermsAsync();
     }
 }

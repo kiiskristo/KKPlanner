@@ -1,9 +1,19 @@
-using MAUI.ViewModel;
-
+using AMMA.Data.ViewModel;
 namespace MAUI.View;
 
+[QueryProperty(nameof(TermId), "termId")]
+[QueryProperty(nameof(CourseId), "courseId")]
 public partial class CourseDetailPage : ContentPage
 {
+    public string TermId
+    {
+        set => ((CourseDetailViewModel)BindingContext).ApplyQueryAttributes(new Dictionary<string, object> { { "termId", value } });
+    }
+    public string CourseId
+    {
+        set => ((CourseDetailViewModel)BindingContext).ApplyQueryAttributes(new Dictionary<string, object> { { "courseId", value } });
+    }
+    
     public CourseDetailPage(CourseDetailViewModel viewModel)
     {
         InitializeComponent();
