@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
+             x:DataType ="viewModel:InstructorDetailViewModel"
+             x:Class="MAUI.View.InstructorDetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" x:DataType="viewModel:InstructorDetailViewModel" Command="{Binding SaveCommand}"/>
+        <ToolbarItem Text="Delete" IsDestructive="True" IsEnabled="{Binding IsEditMode}" x:DataType="viewModel:InstructorDetailViewModel" Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Spacing="25" Padding="30">
+                <Entry x:Name="NameEntry"
+                       Text="{Binding Name.Value}"
+                       Placeholder="Name"
+                       FontSize="Medium"/>
+                <Label Text="{Binding Name.ErrorString}" IsVisible="{Binding Name.HasErrors}" TextColor="Red"/>
+                <Entry x:Name="EmailEntry"
+                       Text="{Binding Email.Value}"
+                       Placeholder="E-mail"
+                       FontSize="Medium"/>
+                <Label Text="{Binding Email.ErrorString}" IsVisible="{Binding Email.HasErrors}" TextColor="Red"/>
+                <Entry x:Name="PhoneEntry"
+                       Text="{Binding Phone.Value}"
+                       Placeholder="Phone number"
+                       FontSize="Medium"/>
+                <Label Text="{Binding Phone.ErrorString}" IsVisible="{Binding Phone.HasErrors}" TextColor="Red"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

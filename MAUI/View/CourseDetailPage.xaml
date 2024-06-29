@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
+             x:DataType ="viewModel:CourseDetailViewModel"
+             x:Class="MAUI.View.CourseDetailPage"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:model="clr-namespace:MAUI.Model"
+             xmlns:maui="clr-namespace:MAUI"
+             x:Name="ThisPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" x:DataType="viewModel:CourseDetailViewModel" Command="{Binding SaveCommand}"/>
+        <ToolbarItem Text="Delete" IsDestructive="True" IsEnabled="{Binding IsEditMode}" x:DataType="viewModel:CourseDetailViewModel" Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView x:Name="ScrollView">
+                <VerticalStackLayout Spacing="15" Padding="30">
+                    <Entry x:Name="TitleEntry"
+                           Text="{Binding Title.Value}"
+                           Placeholder="Title"
+                           FontSize="Medium"/>
+                    <Label Text="{Binding Title.ErrorString}" IsVisible="{Binding Title.HasErrors}" TextColor="Red"/>
+                    <Grid HorizontalOptions="FillAndExpand" HeightRequest="40" RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+                        <Label Text="Start Date" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                        <DatePicker x:Name="StartDatePicker"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Date="{Binding CurrentCourse.StartDate}"
+                                    MinimumDate="{x:Static system:DateTime.Today}"
+                                    Format="D"/>
+                    </Grid>
+                    <Grid HorizontalOptions="FillAndExpand" HeightRequest="40" RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+                        <Label Text="End Date" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                        <DatePicker x:Name="EndDatePicker"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    Date="{Binding CurrentCourse.EndDate}"
+                                    MinimumDate="{x:Static system:DateTime.Today}"
+                                    Format="D" />
+                    </Grid>
+                    <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}" TextColor="Red"/>
+                    <VerticalStackLayout Spacing="0">
+                        <Picker x:Name="StatusPicker" Title="Status"
+                                ItemsSource="{Binding Statuses}"
+                                SelectedItem="{Binding Status.Value, Mode=TwoWay}" />
+                        <Label Text="{Binding Status.ErrorString}" IsVisible="{Binding Status.HasErrors}" TextColor="Red"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="0">
+                        <Picker x:Name="TermPicker" Title="Term"
+                                ItemsSource="{Binding Terms}"
+                                SelectedItem="{Binding SelectedTerm.Value, Mode=TwoWay}"
+                                ItemDisplayBinding="{Binding Title}"/>
+                        <Label Text="{Binding SelectedTerm.ErrorString}" IsVisible="{Binding SelectedTerm.HasErrors}" TextColor="Red"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="0">
+                        <Label Text="Instructor" FontAttributes="Bold"/>
+                        <Entry x:Name="NameEntry"
+                               Text="{Binding Name.Value}"
+                               Placeholder="Name"
+                               FontSize="Medium"/>
+                        <Label Text="{Binding Name.ErrorString}" IsVisible="{Binding Name.HasErrors}" TextColor="Red"/>
+                        <Entry x:Name="EmailEntry"
+                               Text="{Binding Email.Value}"
+                               Placeholder="Email"
+                               FontSize="Medium"/>
+                        <Label Text="{Binding Email.ErrorString}" IsVisible="{Binding Email.HasErrors}" TextColor="Red"/>
+                        <Entry x:Name="PhoneEntry"
+                               Text="{Binding Phone.Value}"
+                               Placeholder="Phone"
+                               FontSize="Medium"/>
+                        <Label Text="{Binding Phone.ErrorString}" IsVisible="{Binding Phone.HasErrors}" TextColor="Red"/>
+                    </VerticalStackLayout>
+                    <Grid HorizontalOptions="FillAndExpand" HeightRequest="40" RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+                        <Label Text="Local Notification" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                        <Switch x:Name="Switch" IsToggled="{Binding CurrentCourse.EnableNotifications}" HorizontalOptions="End"
+                            VerticalOptions="Center" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/> 
+                            <ColumnDefinition Width="Auto"/> 
+                        </Grid.ColumnDefinitions>
+    
+                        <Editor x:Name="NotesEditor" Grid.Column="0" Text="{Binding CurrentCourse.Notes}" 
+                                Placeholder="Enter notes here..." VerticalOptions="Start" 
+                                HeightRequest="100" />
+            
+                        <Button Grid.Column="1" Command="{Binding ShareNotesCommand}"
+                                CornerRadius="20"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                BackgroundColor="#512BD4"
+                                VerticalOptions="Start">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FASolid"
+                                                Glyph="{x:Static maui:FaSolid.Share}"
+                                                Size="20"
+                                                Color="White" />
+                            </Button.ImageSource>
+                        </Button>
+                    </Grid>
+                    <VerticalStackLayout Spacing="10" IsVisible="{Binding IsEditMode}">
+                        <Label Text="Assessments" FontAttributes="Bold"/>
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding CurrentCourse.Assessments}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="model:Assessment">
+                                    <Grid HorizontalOptions="FillAndExpand" HeightRequest="40" RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+                                        <Label Text="{Binding AssessmentName}" 
+                                               HorizontalOptions="StartAndExpand" 
+                                               MaximumWidthRequest="300" 
+                                               VerticalOptions="Center"
+                                               LineBreakMode="TailTruncation"/>
+                                        <Button Grid.Column="2" 
+                                                Command="{Binding Path=BindingContext.EditAssessmentCommand, Source={x:Reference ThisPage}}"
+                                                CommandParameter="{Binding Id}"
+                                                Margin="10,0,0,0"
+                                                CornerRadius="20"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                BackgroundColor="white"
+                                                VerticalOptions="Center">
+                                            <Button.ImageSource>
+                                                <FontImageSource FontFamily="FASolid"
+                                                                 Glyph="{x:Static maui:FaSolid.Edit}"
+                                                                 Size="20"
+                                                                 Color="#512BD4" />
+                                            </Button.ImageSource>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                    <Button Text="Add Assessment" IsVisible="{Binding CanAddMoreAssessments}" Command="{Binding AddAssessmentCommand}"/>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

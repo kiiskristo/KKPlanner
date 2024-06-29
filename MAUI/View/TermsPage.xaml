@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
+             xmlns:model="clr-namespace:MAUI.Model"
+             xmlns:maui="clr-namespace:MAUI"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType ="viewModel:TermsViewModel"
+             x:Class="MAUI.View.TermsPage"
+             x:Name="ThisPage">
+    <ContentPage.Content>
+        <Grid Margin="10,0" RowDefinitions="Auto,*">
+            
+            <CollectionView ItemsSource="{Binding Terms}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Term">
+                        <toolkit:Expander x:Name="MyExpander">
+                            <toolkit:Expander.Header>
+                                <StackLayout Orientation="Vertical" HeightRequest="70">
+                                    <Grid Padding="10,30" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0"
+                                               Text="{Binding Title}"
+                                               FontSize="Medium"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"/>
+                                        <Label Grid.Column="1"
+                                               Text="{Binding DateRange}"
+                                               FontSize="Small"
+                                               HorizontalOptions="EndAndExpand"
+                                               VerticalOptions="Center"/>
+                                        <Button Grid.Column="2" 
+                                                Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference ThisPage}}"
+                                                CommandParameter="{Binding Id}"
+                                                Margin="10,0,0,0"
+                                                CornerRadius="20"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                BackgroundColor="white"
+                                                VerticalOptions="Center">
+                                            <Button.ImageSource>
+                                                <FontImageSource FontFamily="FASolid"
+                                                                 Glyph="{x:Static maui:FaSolid.Edit}"
+                                                                 Size="20"
+                                                                 Color="#512BD4" />
+                                            </Button.ImageSource>
+                                        </Button>
+                                    </Grid>
+                                    <BoxView 
+                                        HeightRequest="0.5" 
+                                        BackgroundColor="Gray" 
+                                        Margin="6,-28"/>
+                                </StackLayout>
+                            </toolkit:Expander.Header>
+                            <toolkit:Expander.Content>
+                                <CollectionView ItemsSource="{Binding Courses}" x:Name="ExpanderContent">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="model:Course">
+                                            <StackLayout>
+                                                <Grid Padding="10,10" ColumnSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Grid.Column="0"
+                                                           Text="{Binding Title}"
+                                                           Margin="10,0,0,0"
+                                                           FontSize="Small"
+                                                           FontAttributes="Bold"/>
+                                                    <Button Grid.Column="1" 
+                                                            Command="{Binding Path=BindingContext.EditCourseCommand, Source={x:Reference ThisPage}}"
+                                                            CommandParameter="{Binding Id}"
+                                                            Margin="10,0,0,0"
+                                                            CornerRadius="20"
+                                                            HeightRequest="30"
+                                                            WidthRequest="30"
+                                                            BackgroundColor="white"
+                                                            VerticalOptions="Center">
+                                                        <Button.ImageSource>
+                                                            <FontImageSource FontFamily="FASolid"
+                                                                             Glyph="{x:Static maui:FaSolid.Edit}"
+                                                                             Size="20"
+                                                                             Color="#512BD4" />
+                                                        </Button.ImageSource>
+                                                    </Button>
+                                                </Grid>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </toolkit:Expander.Content>
+                        </toolkit:Expander>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        <FlexLayout
+            Grid.Row="1"
+            AlignItems="End"
+            JustifyContent="End"
+            Wrap="NoWrap">
+            <Button
+                Command="{Binding AddCommand}"
+                AbsoluteLayout.LayoutBounds="1,1,60,60"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                CornerRadius="35"
+                HeightRequest="70"
+                WidthRequest="70"
+                Margin="0,0,10,20">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="FASolid"
+                        Glyph="{x:Static maui:FaSolid.Plus}"
+                        Size="20"
+                        Color="{StaticResource White}" />
+                </Button.ImageSource>
+            </Button>
+        </FlexLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

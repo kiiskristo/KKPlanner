@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
+             xmlns:model="clr-namespace:MAUI.Model"
+             x:DataType ="viewModel:TermDetailViewModel"
+             x:Class="MAUI.View.TermDetailPage"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:maui="clr-namespace:MAUI"
+             x:Name="ThisPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" x:DataType="viewModel:TermDetailViewModel" Command="{Binding SaveCommand}"/>
+        <ToolbarItem Text="Delete" IsDestructive="True" IsEnabled="{Binding IsEditMode}" x:DataType="viewModel:TermDetailViewModel" Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Spacing="25" Padding="30">
+                <Entry x:Name="TitleEntry"
+                       Text="{Binding Title.Value}"
+                       Placeholder="Title"
+                       FontSize="Medium"/>
+                <Label Text="{Binding Title.ErrorString}" IsVisible="{Binding Title.HasErrors}" TextColor="Red"/>
+                <VerticalStackLayout Spacing="0">
+                <Label Text="Start Date" FontAttributes="Bold"/>
+                <DatePicker x:Name="StartDatePicker"
+                            Date="{Binding CurrentTerm.StartDate}"
+                            MinimumDate="{x:Static system:DateTime.Today}"
+                            Format="D" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="0">
+                    <Label Text="End Date" FontAttributes="Bold"/>
+                    <DatePicker x:Name="EndDatePicker"
+                            Date="{Binding CurrentTerm.EndDate}"
+                            MinimumDate="{x:Static system:DateTime.Today}"
+                            Format="D" />
+                </VerticalStackLayout>
+                <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}" TextColor="Red"/>
+                <VerticalStackLayout Spacing="10" IsVisible="{Binding IsEditMode}">
+                    <Label Text="Courses" FontAttributes="Bold"/>
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding CurrentTerm.Courses}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:Course">
+                                <Grid HorizontalOptions="FillAndExpand" HeightRequest="40" RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+                                    <Label Text="{Binding Title}" 
+                                           HorizontalOptions="StartAndExpand" 
+                                           MaximumWidthRequest="300" 
+                                           VerticalOptions="Center"
+                                           LineBreakMode="TailTruncation"/>
+                                    <Button Grid.Column="2" 
+                                            Command="{Binding Path=BindingContext.EditCourseCommand, Source={x:Reference ThisPage}}"
+                                            CommandParameter="{Binding Id}"
+                                            Margin="10,0,0,0"
+                                            CornerRadius="20"
+                                            HeightRequest="30"
+                                            WidthRequest="30"
+                                            BackgroundColor="white"
+                                            VerticalOptions="Center">
+                                        <Button.ImageSource>
+                                            <FontImageSource FontFamily="FASolid"
+                                                             Glyph="{x:Static maui:FaSolid.Edit}"
+                                                             Size="20"
+                                                             Color="#512BD4" />
+                                        </Button.ImageSource>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+                <Button Text="Add Course" IsVisible="{Binding CanAddMoreCourses}" Command="{Binding AddCourseCommand}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

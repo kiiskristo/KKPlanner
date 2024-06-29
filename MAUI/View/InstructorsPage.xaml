@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
+             xmlns:model="clr-namespace:MAUI.Model"
+             xmlns:maui="clr-namespace:MAUI"
+             x:DataType ="viewModel:InstructorsViewModel"
+             x:Class="MAUI.View.InstructorsPage">
+    <ContentPage.Content>
+        <Grid Margin="10,0" RowDefinitions="Auto,*">
+        <StackLayout>
+            <ListView x:Name="InstructorsListView" 
+                      ItemsSource="{Binding Instructors}" 
+                      ItemSelected="OnItemSelected"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Instructor">
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" HeightRequest="70">
+                                <Grid Padding="10,30" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Name}"
+                                           FontSize="Small"
+                                           FontAttributes="Bold"/>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Email}"
+                                           FontSize="Small"
+                                           HorizontalOptions="EndAndExpand"/>
+                                </Grid>
+                                <BoxView 
+                                    HeightRequest="0.5" 
+                                    BackgroundColor="Gray" 
+                                    Margin="6,-23"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <FlexLayout
+            Grid.Row="1"
+            AlignItems="End"
+            JustifyContent="End"
+            Wrap="NoWrap">
+            <Button
+                Command="{Binding AddCommand}"
+                AbsoluteLayout.LayoutBounds="1,1,60,60"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                CornerRadius="35"
+                HeightRequest="70"
+                WidthRequest="70"
+                Margin="0,0,10,20">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="FASolid"
+                        Glyph="{x:Static maui:FaSolid.Plus}"
+                        Size="20"
+                        Color="{StaticResource White}" />
+                </Button.ImageSource>
+            </Button>
+        </FlexLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

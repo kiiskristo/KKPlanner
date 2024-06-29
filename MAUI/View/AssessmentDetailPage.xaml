@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModel="clr-namespace:MAUI.ViewModel"
+             x:DataType ="viewModel:AssessmentDetailViewModel"
+             x:Class="MAUI.View.AssessmentDetailPage"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             Shell.PresentationMode="Modal">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <Grid BackgroundColor="#512BD4" Padding="0" HeightRequest="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Close" Grid.Column="0" Command="{Binding CloseCommand}" FontAttributes="Bold"/>
+                <Label Grid.Column="1" 
+                       Text="Assessment"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Button Text="Save" Grid.Column="2" Command="{Binding SaveCommand}" FontAttributes="Bold"/>
+            </Grid>
+            <ScrollView>
+                <VerticalStackLayout Spacing="25" Padding="30">
+                    <Entry x:Name="NameEntry"
+                           Text="{Binding Name.Value}"
+                           Placeholder="Title"
+                           FontSize="Medium"/>
+                    <Label Text="{Binding Name.ErrorString}" IsVisible="{Binding Name.HasErrors}" TextColor="Red"/>
+                    <VerticalStackLayout Spacing="0">
+                        <Label Text="Start Date" FontAttributes="Bold"/>
+                        <DatePicker x:Name="StartDatePicker"
+                                    Date="{Binding CurrentAssessment.StartDate}"
+                                    MinimumDate="{x:Static system:DateTime.Today}"
+                                    Format="D" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="0">
+                        <Label Text="End Date" FontAttributes="Bold"/>
+                        <DatePicker x:Name="EndDatePicker"
+                                    Date="{Binding CurrentAssessment.EndDate}"
+                                    MinimumDate="{x:Static system:DateTime.Today}"
+                                    Format="D" />
+                    </VerticalStackLayout>
+                    <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}" TextColor="Red"/>
+                    <VerticalStackLayout Spacing="0">
+                        <Label Text="Type" FontAttributes="Bold"/>
+                        <Picker Title="Status"
+                                ItemsSource="{Binding Types}"
+                                SelectedItem="{Binding Type.Value}" />
+                        <Label Text="{Binding Type.ErrorString}" IsVisible="{Binding Type.HasErrors}" TextColor="Red"/>
+                    </VerticalStackLayout>
+                    <Grid HorizontalOptions="FillAndExpand" HeightRequest="40" RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+                        <Label Text="Notification" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                        <Switch IsToggled="{Binding CurrentAssessment.EnableNotifications}" HorizontalOptions="End"
+                                VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </ScrollView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>
